@@ -31,13 +31,18 @@ composer install
 npm install
 cp .env.example .env
 php artisan key:generate
+```
 
+Configure no `.env`:
+```bash
 DB_DATABASE=movie_app
 DB_USERNAME=...
 DB_PASSWORD=...
 TMDB_TOKEN=seu_token_v4_aqui
-
+```
+```bash
 php artisan migrate
-composer run dev
+composer run dev[
+```
 
 Acesse http://localhost:8000
