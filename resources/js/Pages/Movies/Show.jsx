@@ -1,11 +1,13 @@
 import { Link } from "@inertiajs/react";
 import { useState } from 'react';
 import { router, usePage } from '@inertiajs/react';
+import Navbar from "@/Components/Navbar";
 
 
 export default function Show({ movie, userRating, averageRating, ratingsCount, comments }) {
     return (
         <div className="min-h-screen bg-gray-950 text-white">
+            <Navbar />
             {movie.backdrop && (
                 <div
                     className="h-80 bg-cover bg-center relative"
@@ -131,9 +133,10 @@ function Comments({ movieId, comments }) {
     const handleDelete = (commentId) => {
         router.delete(`/comments/${commentId}`, { preserveScroll: true });
     };
-    console.log(comments)
+
     return (
         <div className="max-w-5xl mx-auto px-6 mt-10 pb-10">
+            
             <h2 className="text-xl font-semibold mb-4">Comentários</h2>
 
             {auth?.user ? (

@@ -1,8 +1,10 @@
+import Navbar from '@/Components/Navbar';
 import { Link } from '@inertiajs/react';
 
 export default function Show({ person }) {
     return (
         <div className="min-h-screen bg-gray-950 text-white px-6 py-10">
+            <Navbar />
             <div className="max-w-5xl mx-auto flex gap-8">
                 <div className="w-48 flex-shrink-0">
                     <div className="aspect-[2/3] rounded-lg bg-gray-800 overflow-hidden">
