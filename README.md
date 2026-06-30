@@ -22,26 +22,22 @@ Reimaginação de um projeto antigo ([laravel-movies-example](https://github.com
 
 ## Setup local
 
-\`\`\`bash
-git clone https://github.com/diegovilhalva/movie-app.git
+
+
+```bash
+git clone [https://github.com/diegovilhalva/movie-app.git](https://github.com/diegovilhalva/movie-app.git)
 cd movie-app
 composer install
 npm install
 cp .env.example .env
 php artisan key:generate
-\`\`\`
 
-Configure no `.env`:
-\`\`\`
 DB_DATABASE=movie_app
 DB_USERNAME=...
 DB_PASSWORD=...
 TMDB_TOKEN=seu_token_v4_aqui
-\`\`\`
 
-\`\`\`bash
 php artisan migrate
 composer run dev
-\`\`\`
 
-Acesse `http://localhost:8000`
+Acesse http://localhost:8000
