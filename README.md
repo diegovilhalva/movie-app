@@ -42,7 +42,7 @@ TMDB_TOKEN=seu_token_v4_aqui
 ```
 ```bash
 php artisan migrate
-composer run dev[
+composer run dev
 ```
 
 Acesse http://localhost:8000

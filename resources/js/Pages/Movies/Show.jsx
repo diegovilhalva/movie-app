@@ -1,3 +1,5 @@
+import { Link } from "@inertiajs/react";
+
 export default function Show({ movie }) {
     return (
         <div className="min-h-screen bg-gray-950 text-white">
@@ -10,11 +12,11 @@ export default function Show({ movie }) {
                 </div>
             )}
 
-            <div className="max-w-5xl mx-auto px-6 -mt-32 relative flex gap-8">
+            <div className="max-w-5xl mx-auto px-6 -mt-32 relative flex flex-col sm:flex-row gap-8">
                 <img
                     src={movie.poster}
                     alt={movie.title}
-                    className="w-48 rounded-lg shadow-lg flex-shrink-0"
+                    className="w-3/4 sm:w-48 h-full rounded-lg shadow-lg flex-shrink-0"
                 />
 
                 <div className="pt-32">
@@ -41,7 +43,7 @@ export default function Show({ movie }) {
                 <h2 className="text-xl font-semibold mb-4">Elenco</h2>
                 <div className="flex gap-4 overflow-x-auto">
                     {movie.cast.map((actor) => (
-                        <div key={actor.id} className="flex-shrink-0 w-24 text-center">
+                        <Link  href={`/people/${actor.id}`}  key={actor.id} className="flex-shrink-0 w-24 text-center">
                             <div className="w-24 h-24 rounded-full bg-gray-800 overflow-hidden">
                                 {actor.profile_path && (
                                     <img
@@ -52,7 +54,7 @@ export default function Show({ movie }) {
                                 )}
                             </div>
                             <p className="text-xs mt-2">{actor.name}</p>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>

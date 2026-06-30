@@ -76,4 +76,18 @@ class TmdbService
 
         return config('services.tmdb.image_base_url') . "/{$size}{$path}";
     }
+
+    public function person(int $personId): array
+    {
+        return Cache::remember("tmdb.person.{$personId}", now()->addHours(24), function () use ($personId) {
+            $response = $this->client()->get("/person/{$personId}", [
+                'language' => 'pt-BR',
+                'append_to_response' => 'combined_credits',
+            ]);
+
+            $response->throw();
+
+            return $response->json();
+        });
+    }
 }

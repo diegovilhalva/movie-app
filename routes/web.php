@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RatingController;
 use Illuminate\Foundation\Application;
@@ -26,6 +27,7 @@ Route::get('/dashboard', function () {
 Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
 Route::get('/movies/search', [MovieController::class, 'search'])->name('movies.search');
 Route::get('/movies/{id}', [MovieController::class, 'show'])->name('movies.show');
+Route::get('/people/{id}', [PersonController::class, 'show'])->name('people.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
