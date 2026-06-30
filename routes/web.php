@@ -35,6 +35,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
+
+Route::middleware('auth')->group(function () {
+    Route::post('/movies/{movieId}/rating', [RatingController::class, 'store'])->name('ratings.store');
+    Route::delete('/movies/{movieId}/rating', [RatingController::class, 'destroy'])->name('ratings.destroy');
+
+    Route::post('/movies/{movieId}/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+});
+
 Route::middleware('auth')->group(function () {
     Route::post('/movies/{id}/rate', [RatingController::class, 'store'])->name('movies.rate');
     Route::post('/movies/{id}/comments', [CommentController::class, 'store'])->name('movies.comments.store');
