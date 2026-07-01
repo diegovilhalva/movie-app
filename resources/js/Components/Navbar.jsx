@@ -40,6 +40,9 @@ export default function Navbar() {
                             <Link href="/watchlist" className="text-gray-300 hover:text-white">
                                 Watchlist
                             </Link>
+                            <Link href="/profile" className="text-gray-300 hover:text-white">
+                                Perfil
+                            </Link>
                             <Link
                                 href="/logout"
                                 method="post"
@@ -102,8 +105,19 @@ export default function Navbar() {
                         {auth?.user ? (
                             <>
                                 <span className="text-gray-400">Olá, {auth.user.name}</span>
-                                <Link href="/watchlist" className="text-gray-300 hover:text-white">
+                                <Link
+                                    href="/watchlist"
+                                    className="text-gray-300 hover:text-white"
+                                    onClick={() => setMenuOpen(false)}
+                                >
                                     Watchlist
+                                </Link>
+                                <Link
+                                    href="/profile"
+                                    className="text-gray-300 hover:text-white"
+                                    onClick={() => setMenuOpen(false)}
+                                >
+                                    Perfil
                                 </Link>
                                 <Link
                                     href="/logout"
