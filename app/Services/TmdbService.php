@@ -90,4 +90,33 @@ class TmdbService
             return $response->json();
         });
     }
+
+    public function genres(): array
+    {
+        return Cache::remember('tmdb.genres', now()->addDays(7), function () {
+            $response = $this->client()->get('/genre/movie/list', [
+                'language' => 'pt-BR',
+            ]);
+
+            $response->throw();
+
+            return $response->json('genres');
+        });
+    }
+
+    public function byGenre(int $genreId, int $page = 1): array
+    {
+        return Cache::remember("tmdb.genre.{$genreId}.page.{$page}", now()->addHours(6), function () use ($genreId, $page) {
+            $response = $this->client()->get('/discover/movie', [
+                'with_genres' => $genreId,
+                'page' => $page,
+                'language' => 'pt-BR',
+                'sort_by' => 'popularity.desc',
+            ]);
+
+            $response->throw();
+
+            return $response->json();
+        });
+    }
 }

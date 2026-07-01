@@ -1,9 +1,13 @@
 import Navbar from '@/Components/Navbar';
 import { Link, router } from '@inertiajs/react';
 
-export default function Index({ movies, currentPage, totalPages }) {
+export default function Index({ movies, currentPage, totalPages, genres, currentGenre }) {
     const goToPage = (page) => {
-        router.get('/movies', { page }, { preserveScroll: true });
+        router.get('/movies', { page, genre: currentGenre || undefined }, { preserveScroll: true });
+    };
+
+    const handleGenre = (genreId) => {
+        router.get('/movies', { genre: genreId || undefined, page: 1 });
     };
 
     return (
@@ -11,8 +15,40 @@ export default function Index({ movies, currentPage, totalPages }) {
             <Navbar />
             <div className="px-6 py-10">
                 <div className="max-w-7xl mx-auto">
-                    <h1 className="text-3xl font-bold mb-8">Filmes Populares</h1>
+                    <h1 className="text-3xl font-bold mb-6">
+                        {currentGenre
+                            ? genres.find(g => g.id === currentGenre)?.name
+                            : 'Filmes Populares'}
+                    </h1>
 
+                    {/* Filtros de gênero */}
+                    <div className="flex gap-2 flex-wrap mb-8">
+                        <button
+                            onClick={() => handleGenre(null)}
+                            className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
+                                !currentGenre
+                                    ? 'bg-blue-600 text-white'
+                                    : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                            }`}
+                        >
+                            Todos
+                        </button>
+                        {genres.map((genre) => (
+                            <button
+                                key={genre.id}
+                                onClick={() => handleGenre(genre.id)}
+                                className={`px-3 py-1.5 rounded-full text-sm transition-colors ${
+                                    currentGenre === genre.id
+                                        ? 'bg-blue-600 text-white'
+                                        : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                                }`}
+                            >
+                                {genre.name}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Grid de filmes */}
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                         {movies.map((movie) => (
                             <Link
@@ -39,6 +75,7 @@ export default function Index({ movies, currentPage, totalPages }) {
                         ))}
                     </div>
 
+                    {/* Paginação */}
                     <div className="flex justify-center gap-4 mt-10">
                         <button
                             disabled={currentPage <= 1}

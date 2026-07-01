@@ -18,7 +18,13 @@ class MovieController extends Controller
     public function index(Request $request)
     {
         $page = $request->integer('page', 1);
-        $data = $this->tmdb->popular($page);
+        $genreId = $request->integer('genre', 0);
+
+        $data = $genreId
+            ? $this->tmdb->byGenre($genreId, $page)
+            : $this->tmdb->popular($page);
+
+        $genres = $this->tmdb->genres();
 
         $movies = collect($data['results'])->map(fn($movie) => [
             'id' => $movie['id'],
@@ -33,6 +39,8 @@ class MovieController extends Controller
             'movies' => $movies,
             'currentPage' => $data['page'],
             'totalPages' => $data['total_pages'],
+            'genres' => $genres,
+            'currentGenre' => $genreId,
         ]);
     }
 
