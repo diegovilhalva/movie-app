@@ -5,7 +5,8 @@ import Navbar from "@/Components/Navbar";
 import WatchlistButton from "@/Components/WatchlistButton";
 
 
-export default function Show({ movie, userRating, averageRating, ratingsCount, comments,watchlistStatus }) {
+export default function Show({ movie, userRating, averageRating, ratingsCount, comments, watchlistStatus }) {
+    
     return (
         <div className="min-h-screen bg-gray-950 text-white">
             <Navbar />
@@ -72,6 +73,33 @@ export default function Show({ movie, userRating, averageRating, ratingsCount, c
                     ))}
                 </div>
                 <Comments movieId={movie.id} comments={comments} />
+              
+                {movie.similar?.length > 0 && (
+                    <div className="max-w-5xl mx-auto px-6 mt-10">
+                        <h2 className="text-xl font-semibold mb-4">Filmes Similares</h2>
+                        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
+                            {movie.similar.map((m) => (
+                                <Link key={m.id} href={`/movies/${m.id}`} className="group block">
+                                    <div className="aspect-[2/3] overflow-hidden rounded-lg bg-gray-800">
+                                        {m.poster ? (
+                                            <img
+                                                src={m.poster}
+                                                alt={m.title}
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full flex items-center justify-center text-gray-500 text-xs">
+                                                Sem imagem
+                                            </div>
+                                        )}
+                                    </div>
+                                    <p className="text-xs mt-1 line-clamp-2">{m.title}</p>
+                                    <p className="text-xs text-gray-500">⭐ {m.vote_average?.toFixed(1)}</p>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
@@ -138,7 +166,7 @@ function Comments({ movieId, comments }) {
 
     return (
         <div className="max-w-5xl mx-auto px-6 mt-10 pb-10">
-            
+
             <h2 className="text-xl font-semibold mb-4">Comentários</h2>
 
             {auth?.user ? (
@@ -181,6 +209,7 @@ function Comments({ movieId, comments }) {
                 {comments.length === 0 && (
                     <p className="text-sm text-gray-500">Nenhum comentário ainda.</p>
                 )}
+
             </div>
         </div>
     );

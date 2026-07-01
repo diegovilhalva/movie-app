@@ -97,6 +97,15 @@ class MovieController extends Controller
                 'runtime' => $movie['runtime'] ?? null,
                 'genres' => $movie['genres'] ?? [],
                 'cast' => collect($movie['credits']['cast'] ?? [])->take(10)->values(),
+                'similar' => collect($movie['similar']['results'] ?? [])
+                    ->take(6)
+                    ->map(fn($m) => [
+                        'id' => $m['id'],
+                        'title' => $m['title'],
+                        'poster' => $this->tmdb->imageUrl($m['poster_path'] ?? null),
+                        'vote_average' => $m['vote_average'],
+                    ])
+                    ->values(),
             ],
             'userRating' => $userRating,
             'averageRating' => $averageRating ? round($averageRating, 1) : null,
