@@ -2,9 +2,10 @@ import { Link } from "@inertiajs/react";
 import { useState } from 'react';
 import { router, usePage } from '@inertiajs/react';
 import Navbar from "@/Components/Navbar";
+import WatchlistButton from "@/Components/WatchlistButton";
 
 
-export default function Show({ movie, userRating, averageRating, ratingsCount, comments }) {
+export default function Show({ movie, userRating, averageRating, ratingsCount, comments,watchlistStatus }) {
     return (
         <div className="min-h-screen bg-gray-950 text-white">
             <Navbar />
@@ -39,6 +40,7 @@ export default function Show({ movie, userRating, averageRating, ratingsCount, c
                             </span>
                         ))}
                     </div>
+                    <WatchlistButton movie={movie} watchlistStatus={watchlistStatus} />
                     <StarRating
                         movieId={movie.id}
                         userRating={userRating}

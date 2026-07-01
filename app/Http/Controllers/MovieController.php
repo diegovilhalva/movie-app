@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Rating;
+use App\Models\Watchlist;
 use App\Services\TmdbService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -78,6 +79,12 @@ class MovieController extends Controller
                 'created_at' => $c->created_at->diffForHumans(),
             ]);
 
+        $watchlistStatus = $request->user()
+            ? Watchlist::where('user_id', $request->user()->id)
+                ->where('movie_id', $id)
+                ->value('status')
+            : null;
+
         return Inertia::render('Movies/Show', [
             'movie' => [
                 'id' => $movie['id'],
@@ -95,6 +102,7 @@ class MovieController extends Controller
             'averageRating' => $averageRating ? round($averageRating, 1) : null,
             'ratingsCount' => $ratingsCount,
             'comments' => $comments,
+            'watchlistStatus' => $watchlistStatus,
         ]);
     }
 }

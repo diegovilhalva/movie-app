@@ -37,6 +37,9 @@ export default function Navbar() {
                     {auth?.user ? (
                         <>
                             <span className="text-gray-400">{auth.user.name}</span>
+                            <Link href="/watchlist" className="text-gray-300 hover:text-white">
+                                Watchlist
+                            </Link>
                             <Link
                                 href="/logout"
                                 method="post"
@@ -99,6 +102,9 @@ export default function Navbar() {
                         {auth?.user ? (
                             <>
                                 <span className="text-gray-400">Olá, {auth.user.name}</span>
+                                <Link href="/watchlist" className="text-gray-300 hover:text-white">
+                                    Watchlist
+                                </Link>
                                 <Link
                                     href="/logout"
                                     method="post"
@@ -108,6 +114,7 @@ export default function Navbar() {
                                 >
                                     Sair
                                 </Link>
+
                             </>
                         ) : (
                             <>
