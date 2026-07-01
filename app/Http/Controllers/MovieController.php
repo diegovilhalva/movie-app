@@ -35,12 +35,23 @@ class MovieController extends Controller
             'vote_average' => $movie['vote_average'],
         ]);
 
+        // só carrega trending na primeira página sem filtro de gênero
+        $trending = (!$genreId && $page === 1)
+            ? collect($this->tmdb->trending())->take(8)->map(fn($m) => [
+                'id' => $m['id'],
+                'title' => $m['title'],
+                'poster' => $this->tmdb->imageUrl($m['poster_path']),
+                'vote_average' => $m['vote_average'],
+            ])->values()
+            : collect();
+
         return Inertia::render('Movies/Index', [
             'movies' => $movies,
             'currentPage' => $data['page'],
             'totalPages' => $data['total_pages'],
             'genres' => $genres,
             'currentGenre' => $genreId,
+            'trending' => $trending,
         ]);
     }
 

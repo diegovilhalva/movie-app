@@ -119,4 +119,17 @@ class TmdbService
             return $response->json();
         });
     }
+
+    public function trending(): array
+    {
+        return Cache::remember('tmdb.trending', now()->addHours(12), function () {
+            $response = $this->client()->get('/trending/movie/week', [
+                'language' => 'pt-BR',
+            ]);
+
+            $response->throw();
+
+            return $response->json('results');
+        });
+    }
 }
