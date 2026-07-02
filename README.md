@@ -4,6 +4,10 @@ Catálogo de filmes com dados em tempo real da [TMDB API](https://www.themoviedb
 
 Reimaginação de um projeto antigo ([laravel-movies-example](https://github.com/drehimself/laravel-movies-example)), refeito do zero com stack moderna e novas features.
 
+## 🚀 Demo
+
+[movie-app-ihdg.onrender.com](https://movie-app-ihdg.onrender.com)
+
 ## Stack
 
 - **Backend:** Laravel 13, PHP 8.5
@@ -14,11 +18,15 @@ Reimaginação de um projeto antigo ([laravel-movies-example](https://github.com
 ## Features
 
 - Catálogo de filmes populares com paginação
-- Busca de filmes em tempo real
-- Página de detalhes com elenco e informações completas
-- Cache de requisições à TMDB API
-- Autenticação de usuários (Breeze)
-- *(em desenvolvimento)* Avaliações e comentários por usuário logado
+- 🔥 Trending semanal
+- 🎭 Filtro por gênero
+- 🔍 Busca de filmes
+- 🎞️ Página de detalhes com elenco e filmes similares
+- 👤 Perfil de ator com filmografia
+- ⭐ Avaliações com estrelas (requer login)
+- 💬 Comentários (requer login)
+- 🔖 Watchlist com status "quero assistir" / "já assisti"
+- 👤 Perfil do usuário com histórico e estatísticas
 
 ## Setup local
 
