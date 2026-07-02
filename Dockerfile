@@ -42,7 +42,7 @@ RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --optimize-autoloader --n
 RUN php artisan package:discover --ansi
 
 # Instala dependências JS e build
-RUN npm install && npm run build && rm -rf node_modules
+RUN npm install --legacy-peer-deps && npm run build && rm -rf node_modules
 
 # Permissões
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
