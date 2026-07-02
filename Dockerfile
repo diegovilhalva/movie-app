@@ -1,4 +1,4 @@
-FROM php:8.3-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 # Dependências do sistema
 RUN apk add --no-cache \
@@ -38,7 +38,8 @@ WORKDIR /var/www/html
 COPY . .
 
 # Instala dependências PHP
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN COMPOSER_MEMORY_LIMIT=-1 composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
+RUN php artisan package:discover --ansi
 
 # Instala dependências JS e build
 RUN npm install && npm run build && rm -rf node_modules
